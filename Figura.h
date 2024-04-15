@@ -38,6 +38,21 @@ typedef enum
 
 class Figura
 {
+public:
+    Figura();
+    
+    void setTipus(const TipusFigura& tipus) { m_tipus = tipus; }
+    void setFila(const int& fila) { m_fila = fila; }
+    void setColumna(const int& columna) { m_columna = columna; }
+    void setGir(const int& gir) { m_gir = gir; }
+    
+private:
+    TipusFigura m_tipus;
+    int m_fila;
+    int m_columna;
+    int m_gir;
+    ColorFigura m_color;
+    int m_figura[MAX_ALCADA][MAX_AMPLADA];
 };
 
 
