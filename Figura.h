@@ -46,12 +46,21 @@ public:
     void setColumna(const int& columna) { m_columna = columna; }
     void setGir(const int& gir) { m_gir = gir; }
     
+    void girHorari();
+    void girAntiHorari();
+    
 private:
+    void transposada();
+    void invertirColumnes();
+    void invertirFiles();
+    
     TipusFigura m_tipus;
     int m_fila;
     int m_columna;
     int m_gir;
     ColorFigura m_color;
+    int m_nFiles;
+    int m_nColumnes;
     int m_figura[MAX_ALCADA][MAX_AMPLADA];
 };
 
