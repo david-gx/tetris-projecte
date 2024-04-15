@@ -13,3 +13,63 @@ Figura::Figura()
             m_figura[i][j] = m_tipus;
     }
 }
+
+void Figura::transposada()
+{
+    int aux;
+    int comptador = 1;
+    for (int i = 0; i < m_nFiles - 1; i++)
+    {
+        for (int j = 0 + comptador; j < m_nColumnes; j++)
+        {
+            aux = m_figura[i][j];
+            m_figura[i][j] = m_figura[j][i];
+            m_figura[j][i] = aux;
+            comptador++;
+        }
+    }
+}
+
+void Figura::invertirColumnes()
+{
+    int matAux[m_nFiles][m_nColumnes];
+    for (int i = 0; i < m_nFiles; i++)
+    {
+        for (int j = 0; j < m_nColumnes; j++)
+            matAux[i][j] = m_figura[i][j];
+    }
+    
+    for (int i = 0; i < m_nFiles; i++)
+    {
+        for (int j = 0; j < m_nColumnes; j++)
+            m_figura[i][j] = matAux[i][m_nColumnes - 1 - j];
+    }
+}
+
+void Figura::invertirFiles()
+{
+    int matAux[m_nFiles][m_nColumnes];
+    for (int i = 0; i < m_nFiles; i++)
+    {
+        for (int j = 0; j < m_nColumnes; j++)
+            matAux[i][j] = m_figura[i][j];
+    }
+    
+    for (int i = 0; i < m_nFiles; i++)
+    {
+        for (int j = 0; j < m_nColumnes; j++)
+            m_figura[i][j] = matAux[m_nFiles - 1 - i][j];
+    }
+}
+
+void Figura::girHorari()
+{
+    transposada();
+    invertirColumnes();
+}
+
+void Figura::girAntiHorari()
+{
+    transposada();
+    invertirFiles();
+}
