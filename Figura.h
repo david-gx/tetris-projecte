@@ -50,6 +50,7 @@ public:
     void setColumna(const int& columna) { m_columna = columna; }
     void setGir(const int& gir) { m_gir = gir; }
     
+    void inicialitzaFigura();
     void girHorari();
     void girAntiHorari();
     
@@ -65,6 +66,8 @@ private:
     ColorFigura m_color;
     int m_nFiles;
     int m_nColumnes;
+    int m_centreFila;
+    int m_centreColumna;
     int m_figura[MAX_ALCADA][MAX_AMPLADA];
 };
 
