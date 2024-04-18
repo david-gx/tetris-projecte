@@ -1,6 +1,10 @@
 #ifndef FIGURA_H
 #define FIGURA_H
 
+#include <fstream>
+#include <iostream>
+using namespace std;
+
 typedef enum
 {
     COLOR_NEGRE = 0,
@@ -64,5 +68,6 @@ private:
     int m_figura[MAX_ALCADA][MAX_AMPLADA];
 };
 
+ifstream& operator>>(ifstream& input, Figura& figura);
 
 #endif
