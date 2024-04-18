@@ -10,7 +10,7 @@ Figura::Figura()
     for (int i = 0; i < MAX_ALCADA; i++)
     {
         for (int j = 0; j < MAX_AMPLADA; j++)
-            m_figura[i][j] = m_tipus;
+            m_figura[i][j] = m_color;
     }
 }
 
@@ -72,4 +72,15 @@ void Figura::girAntiHorari()
 {
     transposada();
     invertirFiles();
+}
+
+ifstream& operator>>(ifstream& input, Figura& figura)
+{
+    int tipus, fila, columna, gir;
+    input >> tipus >> fila >> columna >> gir;
+    figura.setTipus((TipusFigura)tipus);
+    figura.setFila(fila);
+    figura.setColumna(columna);
+    figura.setGir(gir);
+    return input;
 }
