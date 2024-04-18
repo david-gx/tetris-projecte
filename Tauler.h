@@ -9,11 +9,18 @@ class Tauler
 {
 public:
     Tauler();
+    
+    void setTauler(const ColorFigura& valor, const int& fila, const int& columna) { m_tauler[fila][columna] = valor; }
+    ColorFigura getTauler(const int& fila, const int& columna) { return m_tauler[fila][columna]; }
+    
     void cercaEliminaFiles();
     
 private:
     void eliminaFila(const int& fila);
-    int m_tauler[MAX_FILA][MAX_COL];
+    ColorFigura m_tauler[MAX_FILA][MAX_COL];
 };
+
+ifstream& operator>>(ifstream& input, Tauler& tauler);
+ofstream& operator<<(ofstream& output, Tauler& tauler);
 
 #endif
