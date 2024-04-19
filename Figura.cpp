@@ -148,7 +148,7 @@ void Figura::inicialitzaFigura()
 
 void Figura::transposada()
 {
-    int aux;
+    ColorFigura aux;
     int comptador = 1;
     for (int i = 0; i < m_nFiles - 1; i++)
     {
@@ -164,7 +164,7 @@ void Figura::transposada()
 
 void Figura::invertirColumnes()
 {
-    int matAux[m_nFiles][m_nColumnes];
+    ColorFigura matAux[m_nFiles][m_nColumnes];
     for (int i = 0; i < m_nFiles; i++)
     {
         for (int j = 0; j < m_nColumnes; j++)
@@ -180,7 +180,7 @@ void Figura::invertirColumnes()
 
 void Figura::invertirFiles()
 {
-    int matAux[m_nFiles][m_nColumnes];
+    ColorFigura matAux[m_nFiles][m_nColumnes];
     for (int i = 0; i < m_nFiles; i++)
     {
         for (int j = 0; j < m_nColumnes; j++)
@@ -216,3 +216,4 @@ ifstream& operator>>(ifstream& input, Figura& figura)
     figura.setGir(gir);
     return input;
 }
+
