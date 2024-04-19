@@ -3,7 +3,6 @@
 #include "Tauler.h"
 #include "Figura.h"
 #include <string>
-using namespace std;
 
 class Joc
 {
@@ -16,6 +15,8 @@ public:
 	void escriuTauler(const string& nomFitxer);
 
 private:
+    Tauler m_taulerJoc;
+    Figura m_figuraJoc;
 };
 
 #endif
