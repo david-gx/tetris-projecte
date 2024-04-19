@@ -50,6 +50,15 @@ public:
     void setColumna(const int& columna) { m_columna = columna; }
     void setGir(const int& gir) { m_gir = gir; }
     
+    int getFila() const { return m_fila; }
+    int getColumna() const { return m_columna; }
+    int getNFiles() const { return m_nFiles; }
+    int getNColumnes() const { return m_nColumnes; }
+    int getCentreFila() const { return m_centreFila; }
+    int getCentreColumna() const { return m_centreColumna; }
+    ColorFigura getFigura(const int& fila, const int& columna) const { return m_figura[fila][columna]; }
+    
+    
     void inicialitzaFigura();
     void girHorari();
     void girAntiHorari();
@@ -68,7 +77,7 @@ private:
     int m_nColumnes;
     int m_centreFila;
     int m_centreColumna;
-    int m_figura[MAX_ALCADA][MAX_AMPLADA];
+    ColorFigura m_figura[MAX_ALCADA][MAX_AMPLADA];
 };
 
 ifstream& operator>>(ifstream& input, Figura& figura);
