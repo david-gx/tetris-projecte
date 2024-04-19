@@ -2,12 +2,11 @@
 
 void Joc::inicialitza(const string& nomFitxer)
 {
-    ifstream fitxerIn;
-    string nomFitxerIn;
-    cin >> nomFitxerIn;
-    fitxerIn.open(nomFitxerIn);
-    fitxerIn >> m_figuraJoc >> m_taulerJoc;
-    fitxerIn.close();
+    ifstream fitxer;
+    fitxer.open(nomFitxer);
+    if (fitxer.is_open())
+        fitxer >> m_figuraJoc >> m_taulerJoc;
+    fitxer.close();
     
     m_taulerJoc.introdueixFigura(m_figuraJoc);
 }
@@ -29,10 +28,9 @@ int Joc::baixaFigura()
 
 void Joc::escriuTauler(const string& nomFitxer)
 {
-    ofstream fitxerOut;
-    string nomFitxerOut;
-    cin >> nomFitxerOut;
-    fitxerOut.open(nomFitxerOut);
-    fitxerOut << m_taulerJoc;
-    fitxerOut.close();
+    ofstream fitxer;
+    fitxer.open(nomFitxer);
+    if (fitxer.is_open())
+        fitxer << m_taulerJoc;
+    fitxer.close();
 }
