@@ -14,6 +14,12 @@ Tauler::Tauler()
 
 void Tauler::introdueixFigura(const Figura& figura)
 {
+    for (int i = 0; i < MAX_FILA; i++)
+    {
+        for (int j = 0; j < MAX_COL; j++)
+            m_taulerFigura[i][j] = m_tauler[i][j];
+    }
+    
     int nFiles = figura.getNFiles(), nColumnes = figura.getNColumnes();
     int xInicial = figura.getFila() - figura.getCentreFila(), yInicial = figura.getColumna() - figura.getCentreColumna();
     for (int i = xInicial; i < nFiles; i++)
