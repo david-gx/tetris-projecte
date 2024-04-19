@@ -9,6 +9,21 @@ Tauler::Tauler()
     }
 }
 
+void Tauler::introdueixFigura(const Figura& figura)
+{
+    int nFiles = figura.getNFiles(), nColumnes = figura.getNColumnes();
+    int xInicial = figura.getFila() - figura.getCentreFila(), yInicial = figura.getColumna() - figura.getCentreColumna();
+    for (int i = xInicial; i < nFiles; i++)
+    {
+        for (int j = yInicial; j < nColumnes; j++)
+        {
+            if (figura.getFigura(i - xInicial, j - yInicial) != NO_COLOR)
+                m_tauler[i][j] = figura.getFigura(i - xInicial, j - yInicial);
+        }
+    }
+    
+}
+
 void Tauler::eliminaFila(const int& fila)
 {
     for (int i = 0; i < MAX_COL - 1; i++)
