@@ -24,14 +24,14 @@ bool Joc::posicioValida(const Tauler& t, const Figura& f) const
 }
 
 void Joc::inicialitza(const string& nomFitxer)
-{/*
+{
     ifstream fitxer;
     fitxer.open(nomFitxer);
     if (fitxer.is_open())
         fitxer >> m_figuraJoc >> m_taulerJoc;
     fitxer.close();
     
-    m_taulerJoc.introdueixFigura(m_figuraJoc);*/
+    m_taulerJoc.introdueixFigura(m_figuraJoc);
 }
 
 
