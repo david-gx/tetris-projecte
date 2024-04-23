@@ -13,13 +13,14 @@ public:
     void setTauler(const ColorFigura& valor, const int& fila, const int& columna) { m_tauler[fila][columna] = valor; }
     void setTaulerFigura(const ColorFigura& valor, const int& fila, const int& columna) { m_tauler[fila][columna] = valor; }
     
-    ColorFigura getTauler(const int& fila, const int& columna) { return m_tauler[fila][columna]; }
+    ColorFigura getTauler(const int& fila, const int& columna) const { return m_tauler[fila][columna]; }
     
     void introdueixFigura(const Figura& figura);
-    void cercaEliminaFiles();
+    int cercaEliminaFiles();
     
 private:
     void eliminaFila(const int& fila);
+    
     ColorFigura m_tauler[MAX_FILA][MAX_COL];
     ColorFigura m_taulerFigura[MAX_FILA][MAX_COL];
 };
