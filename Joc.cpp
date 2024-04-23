@@ -34,8 +34,30 @@ void Joc::inicialitza(const string& nomFitxer)
     m_taulerJoc.introdueixFigura(m_figuraJoc);*/
 }
 
+
 bool Joc::giraFigura(DireccioGir direccio)
 {
+    Figura f = m_figuraJoc;
+    switch (direccio)
+    {
+        case GIR_HORARI:
+            f.girHorari();
+            break;
+        
+        case GIR_ANTI_HORARI:
+            f.girAntiHorari();
+            break;
+        
+        default:
+            return false;
+    }
+    
+    if (posicioValida(m_taulerJoc, f))
+    {
+        m_figuraJoc = f;
+        m_taulerJoc.introdueixFigura(m_figuraJoc);
+        return true;
+    }
     return false;
 }
 
