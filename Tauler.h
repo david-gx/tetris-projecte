@@ -17,6 +17,7 @@ public:
     ColorFigura getTaulerFigura(const int& fila, const int& columna) const { return m_taulerFigura[fila][columna]; }
     
     void introdueixFigura(const Figura& figura);
+    void actualitzaTauler();
     int cercaEliminaFiles();
     
 private:
