@@ -41,6 +41,27 @@ bool Joc::giraFigura(DireccioGir direccio)
 
 bool Joc::mouFigura(int dirX)
 {
+    Figura f = m_figuraJoc;
+    switch (dirX)
+    {
+        case 1:
+            f.setColumna(f.getColumna() + 1);
+            break;
+            
+        case -1:
+            f.setColumna(f.getColumna() - 1);
+            break;
+            
+        default:
+            return false;
+    }
+    
+    if (posicioValida(m_taulerJoc, f))
+    {
+        m_figuraJoc = f;
+        m_taulerJoc.introdueixFigura(m_figuraJoc);
+        return true;
+    }
     return false;
 }
 
