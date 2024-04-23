@@ -34,6 +34,15 @@ void Tauler::introdueixFigura(const Figura& figura)
     }
 }
 
+void Tauler::actualitzaTauler()
+{
+    for (int i = 0; i < MAX_FILA; i++)
+    {
+        for (int j = 0; j < MAX_COL; j++)
+            m_tauler[i][j] = m_taulerFigura[i][j];
+    }
+}
+
 void Tauler::eliminaFila(const int& fila)
 {
     for (int i = 0; i < MAX_COL - 1; i++)
