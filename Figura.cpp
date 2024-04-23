@@ -14,6 +14,30 @@ Figura::Figura()
     }
 }
 
+Figura& Figura::operator=(const Figura& f)
+{
+	if (&f != this)
+	{
+		m_tipus = f.getTipus();
+        m_fila = f.getFila();
+        m_columna = f.getColumna();
+        m_gir = f.getGir();
+        m_color = getColor();
+        m_nFiles = f.getNFiles();
+        m_nColumnes = f.getNColumnes();
+        m_centreFila = f.getCentreFila();
+        m_centreColumna = f.getCentreColumna();
+        
+        for (int i = 0; i < m_nFiles; i++)
+        {
+            for (int j = 0; j < m_nColumnes; j++)
+                m_figura[i][j] = f.getFigura(i, j);
+        }
+	}
+	
+	return *this;
+}
+
 void Figura::inicialitzaFigura()
 {
     switch (m_tipus)
@@ -216,4 +240,3 @@ ifstream& operator>>(ifstream& input, Figura& figura)
     figura.setGir(gir);
     return input;
 }
-
