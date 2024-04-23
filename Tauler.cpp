@@ -103,7 +103,7 @@ ofstream& operator<<(ofstream& output, Tauler& tauler)
     {
         for (int j = 0; j < MAX_COL; j++)
         {
-            posicio = (int)tauler.getTauler(i, j);
+            posicio = (int)tauler.getTaulerFigura(i, j);
             output << posicio;
         }
     }
