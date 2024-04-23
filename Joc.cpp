@@ -89,7 +89,18 @@ bool Joc::mouFigura(int dirX)
 
 int Joc::baixaFigura()
 {
-    return 0;
+    int nFilesCompletades = 0;
+    m_figuraJoc.setFila(m_figuraJoc.getFila() + 1);
+    Figura f = m_figuraJoc;
+    f.setFila(f.getFila() + 1);
+    
+    if (! posicioValida(m_taulerJoc, f))
+    {
+        m_taulerJoc.introdueixFigura(m_figuraJoc);
+        m_taulerJoc.actualitzaTauler();
+        nFilesCompletades = m_taulerJoc.cercaEliminaFiles();
+    }
+    return nFilesCompletades;
 }
 
 void Joc::escriuTauler(const string& nomFitxer)
