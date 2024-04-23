@@ -8,6 +8,10 @@ bool Joc::posicioValida(const Tauler& t, const Figura& f) const
     int columna = f.getColumna();
     int centreX = f.getCentreFila();
     int centreY = f.getCentreColumna();
+    
+    if ((fila - centreX < 0) || (fila + maxFiles - centreX > MAX_FILA) || (columna - centreY < 0) || (columna + maxColumnes - centreY > MAX_COL))
+        return false;
+    
     for (int i = 0; i < maxFiles; i++)
     {
         for (int j = 0; j < maxColumnes; j++)
