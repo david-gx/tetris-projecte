@@ -48,13 +48,15 @@ void Tauler::eliminaFila(const int& fila)
     }
 }
 
-void Tauler::cercaEliminaFiles()
+int Tauler::cercaEliminaFiles()
 {
+    int nFilesEliminades = 0; 
     int i = MAX_FILA, j = 0;
     int filaDalt = 0;
     bool elimina = true;
     while (i > filaDalt)
     {
+        elimina = true;
         while (j < MAX_COL && elimina)
         {
             if (m_tauler[i][j] != COLOR_NEGRE)
@@ -67,10 +69,12 @@ void Tauler::cercaEliminaFiles()
         {
             eliminaFila(i);
             filaDalt++;
+            nFilesEliminades++;
         }
         else
             i--;
     }
+    return nFilesEliminades;
 }
 
 ifstream& operator>>(ifstream& input, Tauler& tauler)
