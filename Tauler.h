@@ -14,6 +14,7 @@ public:
     void setTaulerFigura(const ColorFigura& valor, const int& fila, const int& columna) { m_tauler[fila][columna] = valor; }
     
     ColorFigura getTauler(const int& fila, const int& columna) const { return m_tauler[fila][columna]; }
+    ColorFigura getTaulerFigura(const int& fila, const int& columna) const { return m_taulerFigura[fila][columna]; }
     
     void introdueixFigura(const Figura& figura);
     int cercaEliminaFiles();
