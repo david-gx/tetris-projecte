@@ -7,6 +7,10 @@ Figura::Figura()
     m_columna = -1;
     m_gir = 0;
     m_color = NO_COLOR;
+    m_nFiles = 0;
+    m_nColumnes = 0;
+    m_centreFila = 0;
+    m_centreColumna = 0;
     for (int i = 0; i < MAX_ALCADA; i++)
     {
         for (int j = 0; j < MAX_AMPLADA; j++)
