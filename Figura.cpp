@@ -192,7 +192,7 @@ void Figura::transposada()
 
 void Figura::invertirColumnes()
 {
-    ColorFigura matAux[m_nFiles][m_nColumnes];
+    ColorFigura matAux[MAX_ALCADA][MAX_AMPLADA];
     for (int i = 0; i < m_nFiles; i++)
     {
         for (int j = 0; j < m_nColumnes; j++)
@@ -208,7 +208,7 @@ void Figura::invertirColumnes()
 
 void Figura::invertirFiles()
 {
-    ColorFigura matAux[m_nFiles][m_nColumnes];
+    ColorFigura matAux[MAX_ALCADA][MAX_AMPLADA];
     for (int i = 0; i < m_nFiles; i++)
     {
         for (int j = 0; j < m_nColumnes; j++)
