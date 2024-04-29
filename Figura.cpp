@@ -185,8 +185,8 @@ void Figura::transposada()
             aux = m_figura[i][j];
             m_figura[i][j] = m_figura[j][i];
             m_figura[j][i] = aux;
-            comptador++;
         }
+        comptador++;
     }
 }
 
