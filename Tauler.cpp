@@ -45,16 +45,15 @@ void Tauler::actualitzaTauler()
 
 void Tauler::eliminaFila(const int& fila)
 {
-    for (int i = 0; i < MAX_COL - 1; i++)
+    for (int i = 0; i < MAX_COL; i++)
     {
-        for (int j = fila; j < MAX_FILA; j++)
+        for (int j = fila; j > 0; j--)
         {
-            m_tauler[j][i] = m_tauler[j + 1][i];
-            m_taulerFigura[j][i] = m_tauler[j + 1][i];
+            m_tauler[j][i] = m_tauler[j - 1][i];
+            m_taulerFigura[j][i] = m_tauler[j - 1][i];
         }
-        
-        m_tauler[MAX_FILA - 1][i] = COLOR_NEGRE;
-        m_tauler[MAX_FILA - 1][i] = COLOR_NEGRE;
+        m_tauler[0][i] = COLOR_NEGRE;
+        m_taulerFigura[0][i] = COLOR_NEGRE;
     }
 }
 
