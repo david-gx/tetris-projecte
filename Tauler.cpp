@@ -19,14 +19,14 @@ void Tauler::introdueixFigura(const Figura& figura)
         for (int j = 0; j < MAX_COL; j++)
             m_taulerFigura[i][j] = m_tauler[i][j];
     }
-    
+
     int nFiles = figura.getNFiles();
     int nColumnes = figura.getNColumnes();
     int xInicial = figura.getFila() - figura.getCentreFila();
     int yInicial = figura.getColumna() - figura.getCentreColumna();
-    for (int i = xInicial; i < nFiles; i++)
+    for (int i = xInicial; i < nFiles + xInicial; i++)
     {
-        for (int j = yInicial; j < nColumnes; j++)
+        for (int j = yInicial; j < nColumnes + yInicial; j++)
         {
             if (figura.getFigura(i - xInicial, j - yInicial) != NO_COLOR)
                 m_taulerFigura[i][j] = figura.getFigura(i - xInicial, j - yInicial);
