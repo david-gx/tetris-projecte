@@ -16,6 +16,7 @@ public:
     
 private:
 	bool posicioValida(const Figura& f) const;
+	bool girValid(const DireccioGir& direccio) const;
     
 	Tauler m_taulerJoc;
 	Figura m_figuraJoc;
