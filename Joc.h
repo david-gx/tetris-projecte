@@ -15,7 +15,7 @@ public:
 	void escriuTauler(const string& nomFitxer);
     
 private:
-	bool posicioValida(const Tauler& t, const Figura& f) const;
+	bool posicioValida(const Figura& f) const;
     
 	Tauler m_taulerJoc;
 	Figura m_figuraJoc;
