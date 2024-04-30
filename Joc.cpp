@@ -1,26 +1,25 @@
 #include "Joc.h"
 
-bool Joc::posicioValida(const Tauler& t, const Figura& f) const
+bool posicioValida(const Tauler& t, const Figura& f)
 {
-    int maxFiles = f.getNFiles();
-    int maxColumnes = f.getNColumnes();
-    int fila = f.getFila();
-    int columna = f.getColumna();
-    int centreX = f.getCentreFila();
-    int centreY = f.getCentreColumna();
-    
-    if ((fila - centreX < 0) || (fila + maxFiles - centreX > MAX_FILA) || (columna - centreY < 0) || (columna + maxColumnes - centreY > MAX_COL))
-        return false;
-    
-    for (int i = 0; i < maxFiles; i++)
-    {
-        for (int j = 0; j < maxColumnes; j++)
-        {
-            if (f.getFigura(i, j) != NO_COLOR && t.getTauler(fila + i - centreX, columna + i - centreY) != COLOR_NEGRE)
-                return false;
-        }
-    }
-    return true;
+	int maxFiles = f.getNFiles();
+	int maxColumnes = f.getNColumnes();
+	int fila = f.getFila();
+	int columna = f.getColumna();
+	int centreX = f.getCentreFila();
+	int centreY = f.getCentreColumna();
+	for (int i = 0; i < maxFiles; i++)
+	{
+		for (int j = 0; j < maxColumnes; j++)
+		{
+			if ((fila + i - centreX >= MAX_FILA || columna + j - centreY < 0 || columna + j - centreY >= MAX_COL) && f.getFigura(i, j) != NO_COLOR)
+				return false;
+
+			if (f.getFigura(i, j) != NO_COLOR && t.getTauler(fila + i - centreX, columna + j - centreY) != COLOR_NEGRE)
+				return false;
+		}
+	}
+	return true;
 }
 
 void Joc::inicialitza(const string& nomFitxer)
