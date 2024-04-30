@@ -22,6 +22,44 @@ bool Joc::posicioValida(const Figura& f)
 	return true;
 }
 
+bool Joc::girValid(const DireccioGir direccio)
+{
+	Figura f = m_figuraJoc;
+	switch (direccio)
+	{
+		case GIR_HORARI:
+			f.girHorari();
+			break;
+
+		case GIR_ANTI_HORARI:
+			f.girAntiHorari();
+			break;
+
+		default:
+			break;
+	}
+
+	if (posicioValida(m_taulerJoc, f));
+	{
+		int maxFiles = f.getNFiles();
+		int maxColumnes = f.getNColumnes();
+		int fila = f.getFila();
+		int columna = f.getColumna();
+		int centreX = f.getCentreFila();
+		int centreY = f.getCentreColumna();
+		for (int i = 0; i < maxFiles; i++)
+		{
+			for (int j = 0; j < maxColumnes; j++)
+			{
+				if (f.getFigura(i, j) == NO_COLOR && m_taulerJoc.getTauler(fila + i - centreX, columna + j - centreY) != COLOR_NEGRE)
+					return false;
+			}
+		}
+		return true;
+	}
+	return false;
+}
+
 void Joc::inicialitza(const string& nomFitxer)
 {
     ifstream fitxer;
