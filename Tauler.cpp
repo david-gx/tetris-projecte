@@ -59,21 +59,22 @@ void Tauler::eliminaFila(const int& fila)
 
 int Tauler::cercaEliminaFiles()
 {
-    int nFilesEliminades = 0; 
+    int nFilesEliminades = 0;
     int i = MAX_FILA, j = 0;
     int filaDalt = 0;
     bool elimina = true;
     while (i > filaDalt)
     {
         elimina = true;
+        j = 0;
         while (j < MAX_COL && elimina)
         {
             if (m_tauler[i][j] != COLOR_NEGRE)
-                 j++;
+                j++;
             else
                 elimina = false;
         }
-        
+
         if (elimina)
         {
             eliminaFila(i);
