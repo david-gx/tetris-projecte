@@ -1,6 +1,6 @@
 #include "Joc.h"
 
-bool Joc::posicioValida(const Figura& f)
+bool posicioValida(const Tauler& t, const Figura& f)
 {
 	int maxFiles = f.getNFiles();
 	int maxColumnes = f.getNColumnes();
@@ -15,49 +15,11 @@ bool Joc::posicioValida(const Figura& f)
 			if ((fila + i - centreX >= MAX_FILA || columna + j - centreY < 0 || columna + j - centreY >= MAX_COL) && f.getFigura(i, j) != NO_COLOR)
 				return false;
 
-			if (f.getFigura(i, j) != NO_COLOR && m_taulerJoc.getTauler(fila + i - centreX, columna + j - centreY) != COLOR_NEGRE)
+			if (f.getFigura(i, j) != NO_COLOR && t.getTauler(fila + i - centreX, columna + j - centreY) != COLOR_NEGRE)
 				return false;
 		}
 	}
 	return true;
-}
-
-bool Joc::girValid(const DireccioGir direccio)
-{
-	Figura f = m_figuraJoc;
-	switch (direccio)
-	{
-		case GIR_HORARI:
-			f.girHorari();
-			break;
-
-		case GIR_ANTI_HORARI:
-			f.girAntiHorari();
-			break;
-
-		default:
-			break;
-	}
-
-	if (posicioValida(m_taulerJoc, f));
-	{
-		int maxFiles = f.getNFiles();
-		int maxColumnes = f.getNColumnes();
-		int fila = f.getFila();
-		int columna = f.getColumna();
-		int centreX = f.getCentreFila();
-		int centreY = f.getCentreColumna();
-		for (int i = 0; i < maxFiles; i++)
-		{
-			for (int j = 0; j < maxColumnes; j++)
-			{
-				if (f.getFigura(i, j) == NO_COLOR && m_taulerJoc.getTauler(fila + i - centreX, columna + j - centreY) != COLOR_NEGRE)
-					return false;
-			}
-		}
-		return true;
-	}
-	return false;
 }
 
 void Joc::inicialitza(const string& nomFitxer)
@@ -68,6 +30,7 @@ void Joc::inicialitza(const string& nomFitxer)
         fitxer >> m_figuraJoc >> m_taulerJoc;
     fitxer.close();
     
+    m_figuraJoc.inicialitzaFigura();
     m_taulerJoc.introdueixFigura(m_figuraJoc);
 }
 
@@ -87,9 +50,10 @@ bool Joc::giraFigura(DireccioGir direccio)
         
         default:
             return false;
+            break;
     }
     
-    if (posicioValida(f))
+    if (posicioValida(m_taulerJoc, f))
     {
         m_figuraJoc = f;
         m_taulerJoc.introdueixFigura(m_figuraJoc);
@@ -115,7 +79,7 @@ bool Joc::mouFigura(int dirX)
             return false;
     }
     
-    if (posicioValida(f))
+    if (posicioValida(m_taulerJoc, f))
     {
         m_figuraJoc = f;
         m_taulerJoc.introdueixFigura(m_figuraJoc);
@@ -127,15 +91,30 @@ bool Joc::mouFigura(int dirX)
 int Joc::baixaFigura()
 {
     int nFilesCompletades = 0;
-    m_figuraJoc.setFila(m_figuraJoc.getFila() + 1);
-    Figura f = m_figuraJoc;
-    f.setFila(f.getFila() + 1);
-    
-    if (! posicioValida(f))
+    if (m_figuraJoc.getMoviment())
     {
-        m_taulerJoc.introdueixFigura(m_figuraJoc);
-        m_taulerJoc.actualitzaTauler();
-        nFilesCompletades = m_taulerJoc.cercaEliminaFiles();
+        Figura f = m_figuraJoc;
+        f.setFila(m_figuraJoc.getFila() + 1);
+        
+        if (posicioValida(m_taulerJoc, f))
+        {
+            m_figuraJoc = f;
+            m_taulerJoc.introdueixFigura(m_figuraJoc);
+            f.setFila(f.getFila() + 1);
+            if (! posicioValida(m_taulerJoc, f))
+            {
+                m_taulerJoc.actualitzaTauler();
+                nFilesCompletades = m_taulerJoc.cercaEliminaFiles();
+                m_figuraJoc.setMoviment(false);
+            }
+        }
+        else
+        {
+            m_taulerJoc.introdueixFigura(m_figuraJoc);
+            m_taulerJoc.actualitzaTauler();
+            nFilesCompletades = m_taulerJoc.cercaEliminaFiles();
+            m_figuraJoc.setMoviment(false);
+        }
     }
     return nFilesCompletades;
 }
