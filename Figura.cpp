@@ -226,12 +226,46 @@ void Figura::girHorari()
 {
     transposada();
     invertirColumnes();
+    if (m_nFiles == 4)
+    {
+        if (m_centreFila == 1)
+        {
+            if (m_centreColumna == 1)
+                m_centreColumna++;
+            else
+                m_centreFila++;
+        }
+        else
+        {
+            if (m_centreColumna == 2)
+                m_centreColumna--;
+            else
+                m_centreFila--;
+        }
+    }
 }
 
 void Figura::girAntiHorari()
 {
     transposada();
     invertirFiles();
+    if (m_nFiles == 4)
+    {
+        if (m_centreFila == 1)
+        {
+            if (m_centreColumna == 2)
+                m_centreColumna--;
+            else
+                m_centreFila++;
+        }
+        else
+        {
+            if (m_centreColumna == 1)
+                m_centreColumna++;
+            else
+                m_centreFila--;
+        }
+    }
 }
 
 ifstream& operator>>(ifstream& input, Figura& figura)
