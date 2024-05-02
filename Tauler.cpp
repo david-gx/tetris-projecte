@@ -99,7 +99,6 @@ ifstream& operator>>(ifstream& input, Tauler& tauler)
             valorColor = (ColorFigura)valor;
             tauler.setTauler(valorColor, i, j);
             tauler.setTaulerFigura(valorColor, i, j);
-            cout << valorColor;
         }
     }
     return input;
