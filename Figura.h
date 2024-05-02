@@ -2,7 +2,6 @@
 #define FIGURA_H
 
 #include <fstream>
-#include <iostream>
 using namespace std;
 
 typedef enum
@@ -49,6 +48,7 @@ public:
     void setFila(const int& fila) { m_fila = fila; }
     void setColumna(const int& columna) { m_columna = columna; }
     void setGir(const int& gir) { m_gir = gir; }
+    void setMoviment(const bool& moviment) { m_moviment = moviment; }
     
     TipusFigura getTipus() const { return m_tipus; }
     int getFila() const { return m_fila; }
@@ -60,6 +60,7 @@ public:
     int getCentreFila() const { return m_centreFila; }
     int getCentreColumna() const { return m_centreColumna; }
     ColorFigura getFigura(const int& fila, const int& columna) const { return m_figura[fila][columna]; }
+    bool getMoviment() const { return m_moviment; }
     
     Figura& operator=(const Figura& f);
     
@@ -72,6 +73,9 @@ private:
     void invertirColumnes();
     void invertirFiles();
     
+    const int m_centreFila = 1;
+    const int m_centreColumna = 1;
+    
     TipusFigura m_tipus;
     int m_fila;
     int m_columna;
@@ -79,9 +83,8 @@ private:
     ColorFigura m_color;
     int m_nFiles;
     int m_nColumnes;
-    int m_centreFila;
-    int m_centreColumna;
     ColorFigura m_figura[MAX_ALCADA][MAX_AMPLADA];
+    bool m_moviment;
 };
 
 ifstream& operator>>(ifstream& input, Figura& figura);
