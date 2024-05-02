@@ -9,8 +9,7 @@ Figura::Figura()
     m_color = NO_COLOR;
     m_nFiles = 0;
     m_nColumnes = 0;
-    m_centreFila = 0;
-    m_centreColumna = 0;
+    m_moviment = true;
     for (int i = 0; i < MAX_ALCADA; i++)
     {
         for (int j = 0; j < MAX_AMPLADA; j++)
@@ -23,14 +22,13 @@ Figura& Figura::operator=(const Figura& f)
 	if (&f != this)
 	{
 		m_tipus = f.getTipus();
-	        m_fila = f.getFila();
-        	m_columna = f.getColumna();
-	        m_gir = f.getGir();
-        	m_color = getColor();
-	        m_nFiles = f.getNFiles();
-        	m_nColumnes = f.getNColumnes();
-		m_centreFila = f.getCentreFila();
-        	m_centreColumna = f.getCentreColumna();
+	    m_fila = f.getFila();
+        m_columna = f.getColumna();
+	    m_gir = f.getGir();
+        m_color = getColor();
+	    m_nFiles = f.getNFiles();
+        m_nColumnes = f.getNColumnes();
+        m_moviment = f.getMoviment();
         
 		for (int i = 0; i < m_nFiles; i++)
         	{
@@ -38,7 +36,6 @@ Figura& Figura::operator=(const Figura& f)
                 	m_figura[i][j] = f.getFigura(i, j);
         	}
 	}
-	
 	return *this;
 }
 
@@ -55,8 +52,6 @@ void Figura::inicialitzaFigura()
                 for (int j = 0; j < m_nColumnes; j++)
                     m_figura[i][j] = m_color;
             }
-            m_centreFila = 0;
-            m_centreColumna = 0;
             break;
         
         case FIGURA_I:
@@ -73,8 +68,6 @@ void Figura::inicialitzaFigura()
                         m_figura[i][j] = NO_COLOR;
                 }
             }
-            m_centreFila = 1;
-            m_centreColumna = 2;
             break;
         
         case FIGURA_T:
@@ -91,8 +84,6 @@ void Figura::inicialitzaFigura()
                         m_figura[i][j] = NO_COLOR;
                 }
             }
-            m_centreFila = 1;
-            m_centreColumna = 1;
             break;
         
         case FIGURA_L:
@@ -109,8 +100,6 @@ void Figura::inicialitzaFigura()
                         m_figura[i][j] = NO_COLOR;
                 }
             }
-            m_centreFila = 1;
-            m_centreColumna = 1;
             break;
         
         case FIGURA_J:
@@ -127,8 +116,6 @@ void Figura::inicialitzaFigura()
                         m_figura[i][j] = NO_COLOR;
                 }
             }
-            m_centreFila = 1;
-            m_centreColumna = 1;
             break;
         
         case FIGURA_Z:
@@ -140,13 +127,12 @@ void Figura::inicialitzaFigura()
                 for (int j = 0; j < m_nColumnes; j++)
                 {
                     if (i == 0 && (j == 0 || j == 1) || i == 1 && (j == 1 || j == 2))
-                        m_figura[i][j] == m_color;
+                        m_figura[i][j] = m_color;
                     else
                         m_figura[i][j] = NO_COLOR;
                 }
             }
-            m_centreFila = 1;
-            m_centreColumna = 1;
+            break;
         
         case FIGURA_S:
             m_nFiles = 3;
@@ -162,14 +148,13 @@ void Figura::inicialitzaFigura()
                         m_figura[i][j] = NO_COLOR;
                 }
             }
-            m_centreFila = 1;
-            m_centreColumna = 1;
             break;
         
         default:
             break;
     }
     
+    m_moviment = true;
     for (int i = 0; i < m_gir; i++)
         girHorari();
 }
@@ -192,7 +177,11 @@ void Figura::transposada()
 
 void Figura::invertirColumnes()
 {
-    ColorFigura matAux[MAX_ALCADA][MAX_AMPLADA];
+    ColorFigura** matAux;
+    matAux = new ColorFigura*[m_nFiles];
+    for (int i = 0; i < m_nFiles; i++)
+        matAux[i] = new ColorFigura[m_nColumnes];
+        
     for (int i = 0; i < m_nFiles; i++)
     {
         for (int j = 0; j < m_nColumnes; j++)
@@ -208,7 +197,11 @@ void Figura::invertirColumnes()
 
 void Figura::invertirFiles()
 {
-    ColorFigura matAux[MAX_ALCADA][MAX_AMPLADA];
+    ColorFigura** matAux;
+    matAux = new ColorFigura*[m_nFiles];
+    for (int i = 0; i < m_nFiles; i++)
+        matAux[i] = new ColorFigura[m_nColumnes];
+    
     for (int i = 0; i < m_nFiles; i++)
     {
         for (int j = 0; j < m_nColumnes; j++)
@@ -226,46 +219,12 @@ void Figura::girHorari()
 {
     transposada();
     invertirColumnes();
-    if (m_nFiles == 4)
-    {
-        if (m_centreFila == 1)
-        {
-            if (m_centreColumna == 1)
-                m_centreColumna++;
-            else
-                m_centreFila++;
-        }
-        else
-        {
-            if (m_centreColumna == 2)
-                m_centreColumna--;
-            else
-                m_centreFila--;
-        }
-    }
 }
 
 void Figura::girAntiHorari()
 {
     transposada();
     invertirFiles();
-    if (m_nFiles == 4)
-    {
-        if (m_centreFila == 1)
-        {
-            if (m_centreColumna == 2)
-                m_centreColumna--;
-            else
-                m_centreFila++;
-        }
-        else
-        {
-            if (m_centreColumna == 1)
-                m_centreColumna++;
-            else
-                m_centreFila--;
-        }
-    }
 }
 
 ifstream& operator>>(ifstream& input, Figura& figura)
