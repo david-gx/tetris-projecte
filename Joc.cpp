@@ -1,6 +1,6 @@
 #include "Joc.h"
 
-bool posicioValida(const Tauler& t, const Figura& f)
+bool Joc::posicioValida(const Figura& f) const
 {
 	int maxFiles = f.getNFiles();
 	int maxColumnes = f.getNColumnes();
@@ -15,7 +15,7 @@ bool posicioValida(const Tauler& t, const Figura& f)
 			if ((fila + i - centreX >= MAX_FILA || columna + j - centreY < 0 || columna + j - centreY >= MAX_COL) && f.getFigura(i, j) != NO_COLOR)
 				return false;
 
-			if (f.getFigura(i, j) != NO_COLOR && t.getTauler(fila + i - centreX, columna + j - centreY) != COLOR_NEGRE)
+			if (f.getFigura(i, j) != NO_COLOR && m_taulerJoc.getTauler(fila + i - centreX, columna + j - centreY) != COLOR_NEGRE)
 				return false;
 		}
 	}
@@ -53,7 +53,7 @@ bool Joc::giraFigura(DireccioGir direccio)
             break;
     }
     
-    if (posicioValida(m_taulerJoc, f))
+    if (posicioValida(f))
     {
         m_figuraJoc = f;
         m_taulerJoc.introdueixFigura(m_figuraJoc);
@@ -79,7 +79,7 @@ bool Joc::mouFigura(int dirX)
             return false;
     }
     
-    if (posicioValida(m_taulerJoc, f))
+    if (posicioValida(f))
     {
         m_figuraJoc = f;
         m_taulerJoc.introdueixFigura(m_figuraJoc);
@@ -96,12 +96,12 @@ int Joc::baixaFigura()
         Figura f = m_figuraJoc;
         f.setFila(m_figuraJoc.getFila() + 1);
         
-        if (posicioValida(m_taulerJoc, f))
+        if (posicioValida(f))
         {
             m_figuraJoc = f;
             m_taulerJoc.introdueixFigura(m_figuraJoc);
             f.setFila(f.getFila() + 1);
-            if (! posicioValida(m_taulerJoc, f))
+            if (! posicioValida(f))
             {
                 m_taulerJoc.actualitzaTauler();
                 nFilesCompletades = m_taulerJoc.cercaEliminaFiles();
