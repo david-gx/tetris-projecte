@@ -165,7 +165,7 @@ void Figura::transposada()
     int comptador = 1;
     for (int i = 0; i < m_nFiles - 1; i++)
     {
-        for (int j = 0 + comptador; j < m_nColumnes; j++)
+        for (int j = comptador; j < m_nColumnes; j++)
         {
             aux = m_figura[i][j];
             m_figura[i][j] = m_figura[j][i];
