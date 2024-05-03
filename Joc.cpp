@@ -34,58 +34,67 @@ void Joc::inicialitza(const string& nomFitxer)
     m_taulerJoc.introdueixFigura(m_figuraJoc);
 }
 
-
 bool Joc::giraFigura(DireccioGir direccio)
 {
-    Figura f = m_figuraJoc;
-    switch (direccio)
+    if (m_figuraJoc.getMoviment())
     {
-        case GIR_HORARI:
-            f.girHorari();
-            break;
+        Figura f = m_figuraJoc;
+        switch (direccio)
+        {
+            case GIR_HORARI:
+                f.girHorari();
+                break;
+            
+            case GIR_ANTI_HORARI:
+                f.girAntiHorari();
+                break;
+            
+            default:
+                return false;
+                break;
+        }
         
-        case GIR_ANTI_HORARI:
-            f.girAntiHorari();
-            break;
-        
-        default:
-            return false;
-            break;
+        if (posicioValida(f))
+        {
+            m_figuraJoc = f;
+            m_taulerJoc.introdueixFigura(m_figuraJoc);
+            return true;
+        }
+        return false;
     }
-    
-    if (posicioValida(f))
-    {
-        m_figuraJoc = f;
-        m_taulerJoc.introdueixFigura(m_figuraJoc);
-        return true;
-    }
-    return false;
+    else
+        return false;
 }
 
 bool Joc::mouFigura(int dirX)
 {
-    Figura f = m_figuraJoc;
-    switch (dirX)
+    if (m_figuraJoc.getMoviment())
     {
-        case 1:
-            f.setColumna(f.getColumna() + 1);
-            break;
+        Figura f = m_figuraJoc;
+        switch (dirX)
+        {
+            case 1:
+                f.setColumna(f.getColumna() + 1);
+                break;
             
-        case -1:
-            f.setColumna(f.getColumna() - 1);
-            break;
+            case -1:
+                f.setColumna(f.getColumna() - 1);
+                break;
             
-        default:
-            return false;
-    }
+            default:
+                return false;
+        }
     
-    if (posicioValida(f))
-    {
-        m_figuraJoc = f;
-        m_taulerJoc.introdueixFigura(m_figuraJoc);
-        return true;
+        if (posicioValida(f))
+        {
+            m_figuraJoc = f;
+            m_taulerJoc.introdueixFigura(m_figuraJoc);
+            return true;
+        }
+        return false;
     }
-    return false;
+    else
+        return false;
 }
 
 int Joc::baixaFigura()
