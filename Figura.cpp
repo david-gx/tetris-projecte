@@ -193,6 +193,14 @@ void Figura::invertirColumnes()
         for (int j = 0; j < m_nColumnes; j++)
             m_figura[i][j] = matAux[i][m_nColumnes - 1 - j];
     }
+
+    for (int i = 0; i < m_nFiles; i++)
+    {
+        delete matAux[i];
+        matAux[i] = nullptr;
+    }
+    delete matAux;
+    matAux = nullptr;
 }
 
 void Figura::invertirFiles()
@@ -213,6 +221,14 @@ void Figura::invertirFiles()
         for (int j = 0; j < m_nColumnes; j++)
             m_figura[i][j] = matAux[m_nFiles - 1 - i][j];
     }
+
+    for (int i = 0; i < m_nFiles; i++)
+    {
+        delete matAux[i];
+        matAux[i] = nullptr;
+    }
+    delete matAux;
+    matAux = nullptr;
 }
 
 void Figura::girHorari()
