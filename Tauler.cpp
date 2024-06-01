@@ -1,5 +1,9 @@
 #include "Tauler.h"
 
+/**
+* Tauler
+* Constructor per defecte de la classe Tauler. Inicialitza totes les posicions del tauler a COLOR_NEGRE
+*/
 Tauler::Tauler()
 {
     for (int i = 0; i < MAX_FILA; i++)
@@ -12,14 +16,21 @@ Tauler::Tauler()
     }
 }
 
+/**
+* introdueixFigura
+* Funció que introdueix la figura passada com a paràmetre al tauler
+* @param figura: figura a introduir
+*/
 void Tauler::introdueixFigura(const Figura& figura)
 {
+    // Copia en la matriu del tauler que es visualitzarà per pantalla el tauler amb les figures ja col·locades
     for (int i = 0; i < MAX_FILA; i++)
     {
         for (int j = 0; j < MAX_COL; j++)
             m_taulerFigura[i][j] = m_tauler[i][j];
     }
 
+    // Afegeix en la matriu del tauler que es visualitzarà per pantalla la figura
     int nFiles = figura.getNFiles();
     int nColumnes = figura.getNColumnes();
     int xInicial = figura.getFila() - figura.getCentreFila();
@@ -34,6 +45,10 @@ void Tauler::introdueixFigura(const Figura& figura)
     }
 }
 
+/**
+* actualitzaTauler
+* Funció que actualitza el tauler, de tal manera que, si hi havia una figura en moviment, quedarà fixa
+*/
 void Tauler::actualitzaTauler()
 {
     for (int i = 0; i < MAX_FILA; i++)
@@ -43,6 +58,11 @@ void Tauler::actualitzaTauler()
     }
 }
 
+/**
+* eliminaFila
+* Funció que elimina una fila
+* @param fila: fila a eliminiar
+*/
 void Tauler::eliminaFila(const int& fila)
 {
     for (int i = 0; i < MAX_COL; i++)
@@ -57,6 +77,11 @@ void Tauler::eliminaFila(const int& fila)
     }
 }
 
+/**
+* cercaEliminaFiles
+* Funció que elimina totes les files completades del tauler
+* @return Nombre de files eliminades
+*/
 int Tauler::cercaEliminaFiles()
 {
     int nFilesEliminades = 0;
@@ -65,6 +90,7 @@ int Tauler::cercaEliminaFiles()
     bool elimina = true;
     while (i > filaDalt)
     {
+        // Cerca si una fila està ocupada, començant per la d'abaix
         elimina = true;
         j = 0;
         while (j < MAX_COL && elimina)
@@ -75,18 +101,24 @@ int Tauler::cercaEliminaFiles()
                 elimina = false;
         }
 
+        // Si la fila està ocupada, l'elimina
         if (elimina)
         {
             eliminaFila(i);
             filaDalt++;
             nFilesEliminades++;
         }
+        // Si la fila no està ocupada, es passa a la següent fila
         else
             i--;
     }
     return nFilesEliminades;
 }
 
+/**
+* operator>>
+* Sobrecàrrega de l'operador >>
+*/
 ifstream& operator>>(ifstream& input, Tauler& tauler)
 {
     int valor;
@@ -104,6 +136,10 @@ ifstream& operator>>(ifstream& input, Tauler& tauler)
     return input;
 }
 
+/**
+* operator<<
+* Sobrecàrrega de l'operador <<
+*/
 ofstream& operator<<(ofstream& output, Tauler& tauler)
 {
     int posicio;
