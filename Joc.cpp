@@ -1,4 +1,5 @@
 #include "Joc.h"
+#include <cstdlib>
 
 /**
  * posicioValida
@@ -175,4 +176,72 @@ void Joc::escriuTauler(const string& nomFitxer)
     if (fitxer.is_open())
         fitxer << m_taulerJoc;
     fitxer.close();
+}
+
+/**
+* inicialitzaTauler
+* Funció que inicialitza totes les caselles del tauler a color negre
+*/
+void Joc::inicialitzaTauler()
+{
+    for (int i = 0; i < MAX_FILA; i++)
+    {
+        for (int j = 0; j < MAX_COL; j++)
+        {
+            m_taulerJoc.setTauler(COLOR_NEGRE, i, j);
+            m_taulerJoc.setTaulerFigura(COLOR_NEGRE, i, j);
+        }
+    }
+}
+
+/**
+* colocaFigura
+* Funció que baixa la figura fins que aquesta queda col·locada
+* @return: Nombre de files completades
+*/
+int Joc::colocaFigura()
+{
+    int nFilesCompletades = 0;
+    while (m_figuraJoc.getMoviment())
+        nFilesCompletades = baixaFigura();
+    return nFilesCompletades;
+}
+
+/**
+* generaFigura
+* Funció que genera una figura aleatòria
+* @return Si la figura es superposa amb alguna de les ja col·locades al tauler
+*/
+bool Joc::generaFigura()
+{
+    m_figuraJoc.setTipus((TipusFigura)(0 + (rand() % 8)));
+    m_figuraJoc.setFila((TipusFigura)(1));
+    m_figuraJoc.setColumna((TipusFigura)(5));
+    m_figuraJoc.setGir((TipusFigura)(0 + (rand() % 4)));
+    m_figuraJoc.inicialitzaFigura();
+    m_taulerJoc.introdueixFigura(m_figuraJoc);
+    if (posicioValida(m_figuraJoc))
+        return true;
+    return false;
+}
+
+/**
+* dibuixaTauler
+* Funció que dibuixa el tauler a través de la llibreria gràfica
+*/
+void Joc::dibuixaTauler() const
+{
+    GraphicManager::getInstance()->drawSprite(GRAFIC_FONS, 0, 0, false);
+    GraphicManager::getInstance()->drawSprite(GRAFIC_TAULER, POS_X_TAULER, POS_Y_TAULER, false);
+
+    for (int i = 0; i < MAX_FILA; i++)
+    {
+        for (int j = 0; j < MAX_COL; j++)
+        {
+            ColorFigura color = m_taulerJoc.getTaulerFigura(i, j);
+            if (color != COLOR_NEGRE)
+                GraphicManager::getInstance()->drawSprite((IMAGE_NAME)(color + 1), POS_X_TAULER + ((j + 1) * MIDA_QUADRAT),
+                    POS_Y_TAULER + (((i + 1) - 1) * MIDA_QUADRAT), false);
+        }
+    }
 }
