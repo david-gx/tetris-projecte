@@ -2,8 +2,11 @@
 #define TAULER_H
 #include "Figura.h"
 
-const int MAX_FILA = 8;
-const int MAX_COL = 8;
+#include "InfoJoc.h"
+#include "GraphicManager.h"
+
+const int MAX_FILA = 21;
+const int MAX_COL = 11;
 
 /**
 * CLASS Tauler
