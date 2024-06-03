@@ -4,6 +4,7 @@
 #include "Joc.h"
 
 #include <iostream>
+#include <string>
 
 Partida::Partida()
 {
@@ -100,7 +101,10 @@ bool Partida::actualitza(double deltaTime)
                 m_joc.giraFigura(GIR_ANTI_HORARI);
             if (Keyboard_GetKeyTrg(KEYBOARD_SPACE))
                 nFilesCompletades = m_joc.colocaFigura();
+            
             m_joc.dibuixaTauler();
+            string msg = "Puntuacio: " + to_string(m_puntuacio) + "  Nivell: " + to_string(m_nivell);
+            GraphicManager::getInstance()->drawFont(FONT_WHITE_30, POS_X_TAULER, POS_Y_TAULER - 50, 1.0, msg);
 
             if (!m_joc.getFigura().getMoviment())
             {
@@ -138,6 +142,7 @@ bool Partida::actualitza(double deltaTime)
 * inicialitzaModeTest
 * Funció que dibuixa el tauler inicial del mode test, amb la primera figura, prenent les dades que llegeix des de fitxer
 */
+
 void Partida::inicialitzaModeTest()
 {
     GraphicManager::getInstance()->drawSprite(GRAFIC_FONS, 0, 0, false);
