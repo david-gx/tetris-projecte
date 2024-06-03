@@ -4,6 +4,9 @@
 #include "Figura.h"
 #include <string>
 
+#include "GraphicManager.h"
+#include "InfoJoc.h"
+
 /**
 * CLASS Joc
 * Classe que permet guardar les dades d'una partida de tetris
@@ -14,11 +17,21 @@
 class Joc
 {
 public:
+	Figura getFigura() const { return m_figuraJoc;  }
+
+	void setFigura(Figura f) { m_figuraJoc = f; }
+	void setTauler(Tauler t) { m_taulerJoc = t; }
+
 	void inicialitza(const string& nomFitxer);
 	bool giraFigura(DireccioGir direccio);
 	bool mouFigura(int dirX);
 	int baixaFigura();
 	void escriuTauler(const string& nomFitxer);
+	
+	void inicialitzaTauler();
+	int colocaFigura();
+	bool generaFigura();
+	void dibuixaTauler() const;
 
 private:
 	bool posicioValida(const Figura& f) const;
