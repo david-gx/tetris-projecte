@@ -4,6 +4,9 @@
 #include <fstream>
 using namespace std;
 
+#include "InfoJoc.h"
+
+/*
 typedef enum
 {
     COLOR_NEGRE = 0,
@@ -29,7 +32,7 @@ typedef enum
     FIGURA_Z,
     FIGURA_S,
 } TipusFigura;
-
+*/
 const int MAX_ALCADA = 4;
 const int MAX_AMPLADA = 4;
 
@@ -97,3 +100,4 @@ private:
 ifstream& operator>>(ifstream& input, Figura& figura);
 
 #endif
+
