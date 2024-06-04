@@ -3,17 +3,22 @@
 
 #include <stdio.h>
 #include <string>
-#include "InfoJoc.h"
 #include "Joc.h"
-
+#include <queue>
 using namespace std;
 
+/**
+* CLASS Partida
+* Classe que permet guardar les dades d'una partida de tetris
+* Les dades que conté són: temps que passa entre dues crides; nivell i puntuació de la partida; velocitat de caiguda
+* de les figures; tres booleans indicant si la figura que s'utilitza és la primera, si el fitxer s'ha llegit correctament
+* i si la partida segueix en curs; un objecte de classe Joc
+* Conté mètodes per inicialitzar i modificar l'estat de la partida en mode normal i mode test
+*/
 class Partida 
 {
 public:
     Partida();
-
-    void setPrimeraFigura(const bool& primeraFigura) { m_primeraFigura = primeraFigura; }
 
     int getPuntuacio() const { return m_puntuacio; }
 
@@ -21,6 +26,7 @@ public:
     bool actualitza(double deltaTime);
 
     void inicialitzaModeTest(const string& nomFitxerTauler);
+    bool actualitzaModeTest(queue<int>& figures, queue<int>& moviments);
 
 private:
     double m_temps;
@@ -29,16 +35,10 @@ private:
     float m_velocitat;
     
     bool m_primeraFigura;
-
     bool m_fitxerLlegit;
     bool m_partidaEnCurs;
     
     Joc m_joc;
-    // Atributs necessaris només pels exemples d'utilització de la llibreria. 
-    // S'hauran d'eliminar per la implementació del projecte
-    static const int MIDA = 4;
-    ColorFigura m_forma[MIDA][MIDA];
-    int m_fila, m_columna;
 };
 
 #endif 
