@@ -20,7 +20,7 @@ public:
     void inicialitzaPartida();
     bool actualitza(double deltaTime);
 
-    void inicialitzaModeTest();
+    void inicialitzaModeTest(const string& nomFitxerTauler);
 
 private:
     double m_temps;
@@ -41,4 +41,4 @@ private:
     int m_fila, m_columna;
 };
 
-#endif
+#endif 
