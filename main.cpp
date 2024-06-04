@@ -70,7 +70,7 @@ int main(int argc, const char* argv[])
         switch (instruccio)
         {
         case 1:
-            tetris.juga(pantalla, nomFitxerPuntuacions);
+            tetris.juga(pantalla);
             break;
 
         case 2:            
