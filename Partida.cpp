@@ -56,9 +56,6 @@ void Partida::inicialitzaPartida()
     m_partidaEnCurs = true;
 
     m_joc.inicialitzaTauler();
-
-    GraphicManager::getInstance()->drawSprite(GRAFIC_FONS, 0, 0, false);
-    GraphicManager::getInstance()->drawSprite(GRAFIC_TAULER, POS_X_TAULER, POS_Y_TAULER, false);
 }
 
 /**
@@ -68,6 +65,7 @@ void Partida::inicialitzaPartida()
 */
 bool Partida::actualitza(double deltaTime)
 {
+    m_joc.dibuixaTauler();
     int nFilesCompletades = 0;
     if (m_partidaEnCurs)
     {
@@ -86,7 +84,6 @@ bool Partida::actualitza(double deltaTime)
             m_temps += deltaTime;
             if (m_temps > m_velocitat)
             {
-                cout << m_nivell << ", " << m_puntuacio << "\n";
                 nFilesCompletades = m_joc.baixaFigura();
                 m_temps = 0;
             }
@@ -102,10 +99,9 @@ bool Partida::actualitza(double deltaTime)
             if (Keyboard_GetKeyTrg(KEYBOARD_SPACE))
                 nFilesCompletades = m_joc.colocaFigura();
             
-            m_joc.dibuixaTauler();
             string msg = "Puntuacio: " + to_string(m_puntuacio) + "  Nivell: " + to_string(m_nivell);
             GraphicManager::getInstance()->drawFont(FONT_WHITE_30, POS_X_TAULER, POS_Y_TAULER - 50, 1.0, msg);
-
+            
             if (!m_joc.getFigura().getMoviment())
             {
                 if (nFilesCompletades > 0)
@@ -143,24 +139,21 @@ bool Partida::actualitza(double deltaTime)
 * Funció que dibuixa el tauler inicial del mode test, amb la primera figura, prenent les dades que llegeix des de fitxer
 */
 
-void Partida::inicialitzaModeTest()
+void Partida::inicialitzaModeTest(const string& nomFitxerTauler)
 {
-    GraphicManager::getInstance()->drawSprite(GRAFIC_FONS, 0, 0, false);
-    GraphicManager::getInstance()->drawSprite(GRAFIC_TAULER, POS_X_TAULER, POS_Y_TAULER, false);
-
     Figura f;
     Tauler t;
     ifstream fitxer;
-    fitxer.open("C:/Users/Usuario/Documents/mp_1r/tetris_projecte/implementacio_llibreria_grafica/1. Resources/data/Games/partida.txt");
+    fitxer.open("C:/Users/Usuario/Documents/mp_1r/tetris_projecte/implementacio_llibreria_grafica_v2/1. Resources/data/Games/fitxers_mode_test/partida.txt");
     if (fitxer.is_open())
         fitxer >> f >> t;
     fitxer.close();
-
+    
     f.inicialitzaFigura();
     t.introdueixFigura(f);
-
+    
     m_joc.setFigura(f);
     m_joc.setTauler(t);
-
+    
     m_joc.dibuixaTauler();
 }
