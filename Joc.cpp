@@ -216,7 +216,7 @@ bool Joc::generaFigura()
 {
     m_figuraJoc.setTipus((TipusFigura)(0 + (rand() % 8)));
     m_figuraJoc.setFila((TipusFigura)(1));
-    m_figuraJoc.setColumna((TipusFigura)(5));
+    m_figuraJoc.setColumna((TipusFigura)(2 + (rand() % 8)));
     m_figuraJoc.setGir((TipusFigura)(0 + (rand() % 4)));
     m_figuraJoc.inicialitzaFigura();
     m_taulerJoc.introdueixFigura(m_figuraJoc);
@@ -244,4 +244,25 @@ void Joc::dibuixaTauler() const
                     POS_Y_TAULER + (((i + 1) - 1) * MIDA_QUADRAT), false);
         }
     }
+}
+
+/**
+* generaFiguraModeTest
+* Funció que genera una figura predeterminada
+* @param tipus: tipus de la figura
+* @param fila: fila on està ubicada la figura en el tauler
+* @param columna: columna on està ubicada la figura en el tauler
+* @param gir: gir de la figura
+*/
+bool Joc::generaFiguraModeTest(const int& tipus, const int& fila, const int& columna, const int& gir)
+{
+    m_figuraJoc.setTipus((TipusFigura)tipus);
+    m_figuraJoc.setFila((TipusFigura)fila);
+    m_figuraJoc.setColumna((TipusFigura)columna);
+    m_figuraJoc.setGir((TipusFigura)gir);
+    m_figuraJoc.inicialitzaFigura();
+    m_taulerJoc.introdueixFigura(m_figuraJoc);
+    if (posicioValida(m_figuraJoc))
+        return true;
+    return false;
 }
