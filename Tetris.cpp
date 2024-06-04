@@ -7,7 +7,7 @@
 * @param pantalla: pantalla on es visualitza la partida
 * @param nomFitxerPuntuacions: nom del fitxer que conté les puntuacions
 */
-void Tetris::juga(Screen& pantalla, const string& nomFitxerPuntuacions)
+void Tetris::juga(Screen& pantalla)
 {   
     //Mostrem la finestra grafica
     m_partida.inicialitzaPartida();
