@@ -14,7 +14,7 @@
 class Tetris
 {
 public:
-	void juga(Screen& pantalla, const string& nomFitxerPuntuacions);
+	void juga(Screen& pantalla);
 	void mostraPuntuacions();
 	void afegeixPuntuacio(const string& nom, const int& punts);
 	void guardaPuntuacions(const string& nomFitxerPuntuacions);
